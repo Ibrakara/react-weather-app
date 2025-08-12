@@ -1,0 +1,19 @@
+/* Header.module.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
