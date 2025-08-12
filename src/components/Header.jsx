@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../store/slices/themeSlice";
-import { FaMoon, FaSun, FaGlobe } from "react-icons/fa";
+import { FaMoon, FaSun } from "react-icons/fa";
+import { IoMdFlag } from "react-icons/io"; // Example flag icons
 import styles from "../styles/Header.module.css";
-import IconButton from "./IconButton";
+import CustomButton from "./CustomButton";
 
 function Header() {
   const isThemeLight = useSelector((state) => state.theme.isThemeLight);
@@ -13,8 +14,8 @@ function Header() {
     dispatch(toggleTheme());
   };
 
-  const handleLanguageChange = () => {
-    alert("Language change functionality not implemented yet!");
+  const handleLanguageChange = (language) => {
+    alert(`Language changed to ${language}`);
   };
 
   useEffect(() => {
@@ -29,12 +30,21 @@ function Header() {
     <header className={styles.header}>
       <h1 className={styles.title}>Weather App</h1>
       <div className={styles.actions}>
-        <IconButton onClick={handleThemeToggle} title="Toggle Theme">
+        <CustomButton onClick={handleThemeToggle} title="Toggle Theme">
           {isThemeLight ? <FaMoon /> : <FaSun />}
-        </IconButton>
-        <IconButton onClick={handleLanguageChange} title="Change Language">
-          <FaGlobe />
-        </IconButton>
+        </CustomButton>
+        <CustomButton
+          onClick={() => handleLanguageChange("English")}
+          title="Change to English"
+        >
+          <IoMdFlag style={{ color: "blue" }} /> {/* Example English flag */}
+        </CustomButton>
+        <CustomButton
+          onClick={() => handleLanguageChange("Spanish")}
+          title="Change to Spanish"
+        >
+          <IoMdFlag style={{ color: "red" }} /> {/* Example Spanish flag */}
+        </CustomButton>
       </div>
     </header>
   );

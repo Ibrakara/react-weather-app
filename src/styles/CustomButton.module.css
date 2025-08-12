@@ -1,4 +1,4 @@
-.iconButton {
+.customButton {
   background: none;
   border: none;
   cursor: pointer;
@@ -8,12 +8,12 @@
   align-items: center;
   justify-content: center;
 }
-.iconButton:hover {
+.customButton:hover {
   opacity: 0.8;
 }
-.iconButton:active {
+.customButton:active {
   border: none;
 }
-.iconButton:focus {
+.customButton:focus {
   outline: none;
 }
