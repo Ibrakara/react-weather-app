@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../store/slices/themeSlice";
+import { setLanguage } from "../store/slices/languageSlice";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { IoMdFlag } from "react-icons/io"; // Example flag icons
 import styles from "../styles/Header.module.css";
 import CustomButton from "./CustomButton";
+import "flag-icons/css/flag-icons.min.css";
 
 function Header() {
   const isThemeLight = useSelector((state) => state.theme.isThemeLight);
+  const currentLanguage = useSelector((state) => state.language.language); // Get current language from Redux
   const dispatch = useDispatch();
 
   const handleThemeToggle = () => {
@@ -15,7 +17,7 @@ function Header() {
   };
 
   const handleLanguageChange = (language) => {
-    alert(`Language changed to ${language}`);
+    dispatch(setLanguage(language));
   };
 
   useEffect(() => {
@@ -33,18 +35,22 @@ function Header() {
         <CustomButton onClick={handleThemeToggle} title="Toggle Theme">
           {isThemeLight ? <FaMoon /> : <FaSun />}
         </CustomButton>
-        <CustomButton
-          onClick={() => handleLanguageChange("English")}
-          title="Change to English"
-        >
-          <IoMdFlag style={{ color: "blue" }} /> {/* Example English flag */}
-        </CustomButton>
-        <CustomButton
-          onClick={() => handleLanguageChange("Spanish")}
-          title="Change to Spanish"
-        >
-          <IoMdFlag style={{ color: "red" }} /> {/* Example Spanish flag */}
-        </CustomButton>
+        <div className={styles.languageButtonContainer}>
+          <CustomButton
+            onClick={() => handleLanguageChange("en")}
+            title="Change to English"
+            className={currentLanguage === "en" ? styles.active : ""}
+          >
+            <span className="fi fi-gb"></span>
+          </CustomButton>
+          <CustomButton
+            onClick={() => handleLanguageChange("es")}
+            title="Change to Spanish"
+            className={currentLanguage === "es" ? styles.active : ""}
+          >
+            <span className="fi fi-es"></span>
+          </CustomButton>
+        </div>
       </div>
     </header>
   );
