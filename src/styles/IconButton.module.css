@@ -1,0 +1,19 @@
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconButton:hover {
+  opacity: 0.8;
+}
+.iconButton:active {
+  border: none;
+}
+.iconButton:focus {
+  outline: none;
+}
