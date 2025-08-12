@@ -21,11 +21,7 @@ function Header() {
   };
 
   useEffect(() => {
-    if (isThemeLight) {
-      document.documentElement.setAttribute("data-theme-light", isThemeLight);
-    } else {
-      document.documentElement.removeAttribute("data-theme-light");
-    }
+    document.documentElement.setAttribute("data-theme-light", isThemeLight);
   }, [isThemeLight]);
 
   return (

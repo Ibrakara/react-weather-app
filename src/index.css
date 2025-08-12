@@ -27,7 +27,7 @@ html[data-theme-light="true"] {
   --text-color: #213547;
 }
 
-html:not([data-theme-light="true"]) {
+html[data-theme-light="false"] {
   --bg-color: #121212;
   --text-color: #ffffff;
 }
