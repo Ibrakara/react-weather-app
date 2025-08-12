@@ -8,7 +8,10 @@ const languageSlice = createSlice({
   },
   reducers: {
     setLanguage: (state, action) => {
-      if (state.supportedLanguages.includes(action.payload)) {
+      if (
+        state.supportedLanguages.includes(action.payload) &&
+        action.payload !== state.language
+      ) {
         state.language = action.payload;
       }
     },
