@@ -2,33 +2,33 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/SearchBar.module.css";
 
 function SearchBar({ onSearch }) {
-  const [query, setQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [text, setText] = useState("");
+  const [debouncedText, setDebouncedText] = useState("");
 
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
+    setText(e.target.value);
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDebouncedQuery(query);
+      setDebouncedText(text);
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [text]);
 
   useEffect(() => {
-    if (debouncedQuery.trim()) {
-      onSearch(debouncedQuery);
+    if (debouncedText.trim()) {
+      onSearch(debouncedText);
     }
-  }, [debouncedQuery, onSearch]);
+  }, [debouncedText, onSearch]);
 
   return (
     <form className={styles.searchBar} onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
         placeholder="Search for a city..."
-        value={query}
+        value={text}
         onChange={handleInputChange}
         className={styles.input}
       />
