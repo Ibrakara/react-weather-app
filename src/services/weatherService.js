@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/index.js";
 
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY; // store in .env
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 export const getCurrentWeather = async (city, units = "metric") => {
   try {

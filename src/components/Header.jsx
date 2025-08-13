@@ -9,7 +9,7 @@ import "flag-icons/css/flag-icons.min.css";
 
 function Header() {
   const isThemeLight = useSelector((state) => state.theme.isThemeLight);
-  const currentLanguage = useSelector((state) => state.language.language); // Get current language from Redux
+  const currentLanguage = useSelector((state) => state.language.language);
   const dispatch = useDispatch();
 
   const handleThemeToggle = () => {
