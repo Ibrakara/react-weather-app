@@ -18,7 +18,7 @@ export const getCurrentWeather = async (city, units = "metric") => {
     throw error;
   }
 };
-export const getWeeklyForecast = async (lat, lon) => {
+export const getThreeHourlyForecast = async (lat, lon, units = "metric") => {
   try {
     const response = await axios.get(`${BASE_URL}/forecast`, {
       params: {
@@ -26,13 +26,9 @@ export const getWeeklyForecast = async (lat, lon) => {
         lon,
         exclude: "hourly,minutely",
         appid: API_KEY,
+        units,
       },
     });
-    console.log(
-      "Weekly forecast data:",
-      new Date(response.data.list[0].dt),
-      response.data.list[0].dt
-    );
     return response.data;
   } catch (error) {
     console.error("Error fetching weekly forecast:", error);
