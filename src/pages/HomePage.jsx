@@ -28,6 +28,7 @@ function HomePage() {
   const {
     isLoading: forecastIsLoading,
     data: forecastData,
+    isSuccess: forecastIsSuccess,
     error: forecastError,
   } = useQuery({
     queryKey: [
@@ -46,10 +47,12 @@ function HomePage() {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
-      {cityIsLoading && <p>Loading...</p>}
+      {cityIsLoading || (forecastIsLoading && <p>Loading...</p>)}
       {cityError && <p>Error: {cityError.message}</p>}
-      {cityData && <WeatherCard weatherData={cityData} />}
-      {!cityIsLoading && !cityError && !cityData && (
+      {cityIsSuccess && cityData && forecastIsSuccess && forecastData && (
+        <WeatherCard forecastData={forecastData} weatherData={cityData} />
+      )}
+      {!cityIsLoading && !cityData && !cityError && (
         <p>No weather data available.</p>
       )}
     </>
