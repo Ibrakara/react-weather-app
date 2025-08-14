@@ -8,9 +8,9 @@
 .input {
   flex: 1;
   padding: 10px;
-  border: 1px solid;
+  border: 1px solid var(--input-border);
   border-radius: 5px;
   font-size: 1rem;
-  background-color: var(--text-color);
-  color: var(--bg-color);
+  background-color: var(--input-bg);
+  color: var(--input-text);
 }

@@ -1,16 +1,66 @@
 :root {
+  /* Theme variables */
+  --card-bg-light: #f0f8ff;
+  --card-text-light: #333;
+  --card-icon-light: #4682b4;
+  --card-description-light: #555;
+  --body-bg-light: #ffffff;
+  --body-text-light: #000000;
+
+  --input-bg-light: #34495e;
+  --input-text-light: #ecf0f1;
+  --input-border-light: #566573;
+
+  --card-bg-dark: #2c3e50;
+  --card-text-dark: #ecf0f1;
+  --card-icon-dark: #87ceeb;
+  --card-description-dark: #bdc3c7;
+  --body-bg-dark: #34495e;
+  --body-text-dark: #ecf0f1;
+
+  --input-bg-dark: #ffffff;
+  --input-text-dark: #333333;
+  --input-border-dark: #cccccc;
+
+  /* Default styles (dark theme) */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--body-text-dark);
+  background-color: var(--body-bg-dark);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body.light {
+  --card-bg: var(--card-bg-light);
+  --card-text: var(--card-text-light);
+  --card-icon: var(--card-icon-light);
+  --card-description: var(--card-description-light);
+  background-color: var(--body-bg-light);
+  color: var(--body-text-light);
+
+  --input-bg: var(--input-bg-light);
+  --input-text: var(--input-text-light);
+  --input-border: var(--input-border-light);
+}
+
+body.dark {
+  --card-bg: var(--card-bg-dark);
+  --card-text: var(--card-text-dark);
+  --card-icon: var(--card-icon-dark);
+  --card-description: var(--card-description-dark);
+  background-color: var(--body-bg-dark);
+  color: var(--body-text-dark);
+
+  --input-bg: var(--input-bg-dark);
+  --input-text: var(--input-text-dark);
+  --input-border: var(--input-border-dark);
 }
 
 a {
@@ -22,23 +72,12 @@ a:hover {
   color: #535bf2;
 }
 
-html[data-theme-light="true"] {
-  --bg-color: #ffffff;
-  --text-color: #213547;
-}
-
-html[data-theme-light="false"] {
-  --bg-color: #121212;
-  --text-color: #ffffff;
-}
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--bg-color);
-  color: var(--text-color);
 }
 
 h1 {

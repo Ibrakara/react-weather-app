@@ -8,8 +8,9 @@ import CustomButton from "./CustomButton";
 import "flag-icons/css/flag-icons.min.css";
 
 function Header() {
-  const isThemeLight = useSelector((state) => state.theme.isThemeLight);
+  const theme = useSelector((state) => state.theme.mode);
   const currentLanguage = useSelector((state) => state.language.language);
+
   const dispatch = useDispatch();
 
   const handleThemeToggle = () => {
@@ -21,15 +22,15 @@ function Header() {
   };
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme-light", isThemeLight);
-  }, [isThemeLight]);
+    document.body.className = theme;
+  }, [theme]);
 
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>Weather App</h1>
       <div className={styles.actions}>
         <CustomButton onClick={handleThemeToggle} title="Toggle Theme">
-          {isThemeLight ? <FaMoon /> : <FaSun />}
+          {theme === "light" ? <FaMoon /> : <FaSun />}
         </CustomButton>
         <div className={styles.languageButtonContainer}>
           <CustomButton
