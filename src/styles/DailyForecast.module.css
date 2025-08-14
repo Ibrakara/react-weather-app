@@ -1,33 +1,41 @@
 .forecastContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
   margin: 1rem auto;
-  padding: 1rem;
+  width: 100%;
+}
+
+.dayLink {
+  text-decoration: none;
+  color: inherit;
+  flex: 1 1 60px;
+  min-width: 100px;
+  max-width: 120px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+}
+
+.dayLink:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .dayCard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-color: var(--input-border);
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 10px;
   gap: 0.2rem;
-  padding: 0.2rem;
-}
-
-.dayCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+  padding: 0.8rem 0.5rem;
 }
 
 .date {
   font-weight: bold;
   color: var(--card-text);
   margin: 0;
+  font-size: 1.1rem;
 }
 
 .icon {
@@ -40,6 +48,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: var(--card-text);
 }
