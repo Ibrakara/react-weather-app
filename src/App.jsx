@@ -35,9 +35,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <Link to="/">Home</Link> | <Link to="/detail/1">Details</Link>
-      <main>
-        <h1>Weather App</h1>
+      <main className="content">
         <Outlet />
       </main>
     </>
