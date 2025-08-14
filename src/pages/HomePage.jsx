@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../containers/SearchBar";
 import { useQuery } from "@tanstack/react-query";
 import {
   getCurrentWeather,

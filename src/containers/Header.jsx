@@ -4,7 +4,7 @@ import { toggleTheme } from "../store/slices/themeSlice";
 import { setLanguage } from "../store/slices/languageSlice";
 import { FaMoon, FaSun } from "react-icons/fa";
 import styles from "../styles/Header.module.css";
-import CustomButton from "./CustomButton";
+import CustomButton from "../components/CustomButton";
 import "flag-icons/css/flag-icons.min.css";
 
 function Header() {
