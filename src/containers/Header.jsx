@@ -6,6 +6,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import styles from "../styles/Header.module.css";
 import CustomButton from "../components/CustomButton";
 import "flag-icons/css/flag-icons.min.css";
+import { languages } from "../constants";
 
 function Header() {
   const theme = useSelector((state) => state.theme.mode);
@@ -34,16 +35,16 @@ function Header() {
         </CustomButton>
         <div className={styles.languageButtonContainer}>
           <CustomButton
-            onClick={() => handleLanguageChange("en")}
+            onClick={() => handleLanguageChange(languages.en)}
             title="Change to English"
-            className={currentLanguage === "en" ? styles.active : ""}
+            className={currentLanguage === languages.en ? styles.active : ""}
           >
             <span className="fi fi-gb"></span>
           </CustomButton>
           <CustomButton
-            onClick={() => handleLanguageChange("es")}
+            onClick={() => handleLanguageChange(languages.es)}
             title="Change to Spanish"
-            className={currentLanguage === "es" ? styles.active : ""}
+            className={currentLanguage === languages.es ? styles.active : ""}
           >
             <span className="fi fi-es"></span>
           </CustomButton>
