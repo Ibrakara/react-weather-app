@@ -3,7 +3,7 @@ import { loadState, saveState } from "../services/helpers";
 import themeReducer from "./slices/themeSlice";
 import locationReducer from "./slices/locationSlice";
 import languagleReducer from "./slices/languageSlice";
-import weatherSliceReducer from "./slices/wheaterSlice";
+import weatherSliceReducer from "./slices/weatherSlice";
 
 const preloadedState = loadState();
 
