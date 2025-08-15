@@ -68,3 +68,9 @@ export const saveState = (state) => {
     console.error("Could not save state to localStorage", err);
   }
 };
+export function getErrorMessage(cityError, forecastError) {
+  if (!cityError && !forecastError) return null;
+  const error = cityError || forecastError;
+  if (error.response?.data?.message) return error.response.data.message;
+  return error.message || "An unknown error occurred.";
+}
