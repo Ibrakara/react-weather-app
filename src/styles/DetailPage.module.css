@@ -1,6 +1,6 @@
 .container {
-  width: 100%;
-  max-width: 800px;
+  min-width: 60vw;
+  max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
   background-color: var(--card-bg);
@@ -42,52 +42,4 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 1.5rem;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1rem;
-  border: 1px solid var(--input-border);
-  border-radius: 10px;
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-
-.current {
-  background-color: var(--card-icon);
-  color: var(--card-bg);
-  border-color: var(--card-icon);
-  transform: scale(1.05);
-}
-
-.time {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0 0 0.5rem 0;
-}
-
-.icon {
-  color: var(--card-icon);
-  margin-bottom: 0.5rem;
-}
-
-.temp {
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin: 0;
-}
-
-.current .time,
-.current .description {
-  color: var(--card-bg);
-  font-weight: 600;
-}
-
-.description {
-  font-size: 0.9rem;
-  text-transform: capitalize;
-  color: var(--card-description);
-  margin-top: 0.5rem;
 }
