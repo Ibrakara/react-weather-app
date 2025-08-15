@@ -22,7 +22,10 @@ export const getCurrentWeather = async (city, lat, lon, units = "metric") => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching current weather:", error);
+    console.error(
+      `Error fetching current weather for city: ${city}, lat: ${lat}, lon: ${lon}`,
+      error
+    );
     throw error;
   }
 };
@@ -39,7 +42,10 @@ export const getThreeHourlyForecast = async (lat, lon, units = "metric") => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching weekly forecast:", error);
+    console.error(
+      `Error fetching 3-hourly forecast for lat: ${lat}, lon: ${lon}`,
+      error
+    );
     throw error;
   }
 };
