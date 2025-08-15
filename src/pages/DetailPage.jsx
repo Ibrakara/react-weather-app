@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
-import { useParams } from "react-router-dom";
-import HourlyForecast from "../components/HourlyForecast";
+import { useParams, Link } from "react-router-dom";
 import ErrorMessage from "../components/ErrorMessage";
+import ForecastCard from "../components/ForecastCard";
 import { getErrorMessage } from "../services/helpers";
 import { useWeeklyForecast } from "../hooks/useForecastList";
+import styles from "../styles/DetailPage.module.css";
 
 const DetailPage = () => {
   const { locationDate } = useParams();
@@ -35,13 +36,38 @@ const DetailPage = () => {
     return <ErrorMessage message={errorMessage} />;
   }
 
+  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+
   return (
-    <HourlyForecast
-      data={detailedDayData}
-      locationName={locationName}
-      date={date}
-      timezoneOffset={forecastData.city.timezone}
-    />
+    <div className={styles.container}>
+      <h2 className={styles.title}>{locationName}</h2>
+      <h3 className={styles.date}>{formattedDate}</h3>
+      <Link to="/" className={styles.backLink}>
+        &larr; Back to Overview
+      </Link>
+      <div className={styles.list}>
+        {detailedDayData.map((item) => {
+          return (
+            <ForecastCard
+              key={item.dt}
+              dateString={new Date(item.dt * 1000).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+              iconCode={item.weather[0].icon}
+              temp={Math.round(item.main.temp)}
+              description={item.weather[0].description}
+            />
+          );
+        })}
+      </div>
+    </div>
   );
 };
 
