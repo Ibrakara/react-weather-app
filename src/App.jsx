@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setLocation, setLocationError } from "./store/slices/locationSlice";
 import Header from "./containers/Header";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./App.css";
 
 const App = () => {
