@@ -7,9 +7,9 @@
   --body-bg-light: #ffffff;
   --body-text-light: #000000;
 
-  --input-bg-light: #34495e;
-  --input-text-light: #ecf0f1;
-  --input-border-light: #566573;
+  --input-bg-light: #f7fcff;
+  --input-text-light: #34495e;
+  --input-border-light: #d6e2f0;
 
   --card-bg-dark: #2c3e50;
   --card-text-dark: #ecf0f1;
@@ -18,9 +18,9 @@
   --body-bg-dark: #34495e;
   --body-text-dark: #ecf0f1;
 
-  --input-bg-dark: #ffffff;
-  --input-text-dark: #333333;
-  --input-border-dark: #cccccc;
+  --input-bg-dark: #2c3e50;
+  --input-text-dark: #ecf0f1;
+  --input-border-dark: #4a6078;
 
   /* Default styles (dark theme) */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
