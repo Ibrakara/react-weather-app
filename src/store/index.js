@@ -15,6 +15,7 @@ export const store = configureStore({
     weather: weatherSliceReducer,
   },
   preloadedState,
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 store.subscribe(() => {
