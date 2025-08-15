@@ -14,8 +14,12 @@ const App = () => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            console.log(latitude, longitude);
-            dispatch(setLocation({ latitude, longitude }));
+            dispatch(
+              setLocation({
+                latitude: latitude.toFixed(2),
+                longitude: longitude.toFixed(2),
+              })
+            );
           },
           (error) => {
             dispatch(setLocationError(error.message));
