@@ -4,6 +4,7 @@ const locationSlice = createSlice({
   name: "location",
   initialState: {
     currentLocation: null,
+    searchedLocation: "",
     error: null,
   },
   reducers: {
@@ -14,8 +15,12 @@ const locationSlice = createSlice({
     setLocationError: (state, action) => {
       state.error = action.payload;
     },
+    setSearchedLocation: (state, action) => {
+      state.searchedLocation = action.payload;
+    },
   },
 });
 
-export const { setLocation, setLocationError } = locationSlice.actions;
+export const { setLocation, setSearchedLocation, setLocationError } =
+  locationSlice.actions;
 export default locationSlice.reducer;
