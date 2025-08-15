@@ -12,7 +12,7 @@ function SearchBar({ onSearch }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedText(text);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [text]);
