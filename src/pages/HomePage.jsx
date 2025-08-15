@@ -12,6 +12,7 @@ import {
 } from "../store/slices/weatherSlice.js";
 import { setSearchedLocation } from "../store/slices/locationSlice.js";
 import { getErrorMessage } from "../services/helpers.js";
+import styles from "../styles/HomePage.module.css";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -76,7 +77,7 @@ function HomePage() {
   }, [forecastIsSuccess, forecastData, dispatch]);
 
   return (
-    <>
+    <div className={styles.homePage}>
       <SearchBar
         onSearch={(location) => dispatch(setSearchedLocation(location))}
       />
@@ -88,7 +89,7 @@ function HomePage() {
       {!cityIsLoading && !cityData && !cityError && (
         <p>No weather data available.</p>
       )}
-    </>
+    </div>
   );
 }
 
