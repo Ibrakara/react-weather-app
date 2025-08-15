@@ -1,0 +1,29 @@
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  background-color: #fbe9e7; /* Light red background */
+  color: #c62828; /* Dark red text */
+  border: 1px solid #ffccbc; /* Light red border */
+  max-width: 500px;
+}
+
+body.dark .errorContainer {
+  background-color: #5d2c2c;
+  color: #ffcdd2;
+  border-color: #8c3f3f;
+}
+
+.errorIcon {
+  font-size: 1.5rem;
+}
+
+.errorMessage {
+  margin: 0;
+  font-weight: 500;
+  text-transform: capitalize;
+}
