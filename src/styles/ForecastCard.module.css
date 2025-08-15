@@ -1,0 +1,40 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.8rem 0.5rem;
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.dateTime {
+  font-weight: bold;
+  color: var(--card-text);
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.icon {
+  color: var(--card-icon);
+}
+
+.temps {
+  font-size: 1rem;
+  color: var(--card-text);
+}
+
+.temp {
+  font-weight: 500;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: var(--card-text-secondary);
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+}
