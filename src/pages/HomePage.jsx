@@ -3,6 +3,7 @@ import SearchBar from "../containers/SearchBar";
 import { useQuery } from "@tanstack/react-query";
 import { getCurrentWeather } from "../services/weatherService.js";
 import WeatherCard from "../components/WeatherCard.jsx";
+import ErrorMessage from "../components/ErrorMessage.jsx";
 import { useWeeklyForecast } from "../hooks/useForecastList.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,13 +11,13 @@ import {
   setForecastList,
 } from "../store/slices/weatherSlice.js";
 import { setSearchedLocation } from "../store/slices/locationSlice.js";
+import { getErrorMessage } from "../services/helpers.js";
 
 function HomePage() {
   const dispatch = useDispatch();
-  const userLatitude = useSelector((state) => {
-    console.log(state.location.currentLocation?.latitude);
-    return state.location.currentLocation?.latitude;
-  });
+  const userLatitude = useSelector(
+    (state) => state.location.currentLocation?.latitude
+  );
   const userLongitude = useSelector(
     (state) => state.location.currentLocation?.longitude
   );
@@ -55,6 +56,10 @@ function HomePage() {
     () => !!(cityError || forecastError),
     [cityError, forecastError]
   );
+  const errorMessage = useMemo(
+    () => getErrorMessage(cityError, forecastError),
+    [cityError, forecastError]
+  );
   const isSuccess = useMemo(
     () => cityIsSuccess && forecastIsSuccess,
     [cityIsSuccess, forecastIsSuccess]
@@ -76,7 +81,7 @@ function HomePage() {
         onSearch={(location) => dispatch(setSearchedLocation(location))}
       />
       {isLoading && <p>Loading...</p>}
-      {hasError && <p>Error:{` ${cityError.response.data.message}`}</p>}
+      {hasError && <ErrorMessage message={errorMessage} />}
       {isSuccess && (
         <WeatherCard forecastData={forecastData} weatherData={cityData} />
       )}
