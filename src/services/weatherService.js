@@ -29,16 +29,29 @@ export const getCurrentWeather = async (city, lat, lon, units = "metric") => {
     throw error;
   }
 };
-export const getThreeHourlyForecast = async (lat, lon, units = "metric") => {
+export const getThreeHourlyForecast = async (
+  city,
+  lat,
+  lon,
+  units = "metric"
+) => {
+  console.log("Fetching 3-hourly forecast for:", { city, lat, lon });
   try {
+    const params = {
+      units,
+      appid: API_KEY,
+      exclude: "minutely,hourly",
+    };
+    if (city) {
+      params.q = city;
+    } else if (lat !== null && lon !== null) {
+      params.lat = lat;
+      params.lon = lon;
+    } else {
+      return null;
+    }
     const response = await axios.get(`${BASE_URL}/forecast`, {
-      params: {
-        lat,
-        lon,
-        exclude: "hourly,minutely",
-        appid: API_KEY,
-        units,
-      },
+      params: params,
     });
     return response.data;
   } catch (error) {
