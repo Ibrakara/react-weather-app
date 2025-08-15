@@ -6,6 +6,7 @@ import WeatherCard from "../components/WeatherCard.jsx";
 import ErrorMessage from "../components/ErrorMessage.jsx";
 import { useWeeklyForecast } from "../hooks/useForecastList.js";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   setCurrentWeather,
   setForecastList,
@@ -16,6 +17,8 @@ import styles from "../styles/HomePage.module.css";
 
 function HomePage() {
   const dispatch = useDispatch();
+  const { t: translate } = useTranslation();
+
   const userLatitude = useSelector(
     (state) => state.location.currentLocation?.latitude
   );
@@ -80,14 +83,15 @@ function HomePage() {
     <div className={styles.homePage}>
       <SearchBar
         onSearch={(location) => dispatch(setSearchedLocation(location))}
+        placeholder={translate("search placeholder")}
       />
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p>{translate("loading")}</p>}
       {hasError && <ErrorMessage message={errorMessage} />}
       {isSuccess && (
         <WeatherCard forecastData={forecastData} weatherData={cityData} />
       )}
       {!cityIsLoading && !cityData && !cityError && (
-        <p>No weather data available.</p>
+        <p>{translate("No weather data available")}.</p>
       )}
     </div>
   );

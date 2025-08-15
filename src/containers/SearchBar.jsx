@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/SearchBar.module.css";
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onSearch, placeholder = "Search for a city..." }) {
   const [text, setText] = useState("");
   const [debouncedText, setDebouncedText] = useState("");
 
@@ -27,7 +27,7 @@ function SearchBar({ onSearch }) {
     <form className={styles.searchBar} onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
-        placeholder="Search for a city..."
+        placeholder={placeholder}
         value={text}
         onChange={handleInputChange}
         className={styles.input}

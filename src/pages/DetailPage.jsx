@@ -5,9 +5,13 @@ import ForecastCard from "../components/ForecastCard";
 import { getErrorMessage } from "../services/helpers";
 import { useWeeklyForecast } from "../hooks/useForecastList";
 import styles from "../styles/DetailPage.module.css";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const DetailPage = () => {
   const { locationDate } = useParams();
+  const { t: translate } = useTranslation();
+  const currentLanguage = useSelector((state) => state.language.language);
 
   const date = locationDate.split("-").slice(1).join("-");
   const locationName = locationDate.split("-")[0];
@@ -27,8 +31,18 @@ const DetailPage = () => {
     });
   }, [forecastData, date]);
 
+  const formattedDate = useMemo(() => {
+    return new Date(date).toLocaleDateString(currentLanguage, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+  }, [date, currentLanguage]);
+
   if (isLoading) {
-    return <p>Loading details...</p>;
+    return <p>{translate("loading")}</p>;
   }
 
   if (error) {
@@ -36,20 +50,12 @@ const DetailPage = () => {
     return <ErrorMessage message={errorMessage} />;
   }
 
-  const formattedDate = new Date(date).toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    timeZone: "UTC",
-  });
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{locationName}</h2>
-      <h3 className={styles.date}>{formattedDate}</h3>
+      <h3 className={styles.date}>{`${formattedDate}`}</h3>
       <Link to="/" className={styles.backLink}>
-        &larr; Back to Overview
+        &larr; {translate("back to overview")}
       </Link>
       <div className={styles.list}>
         {detailedDayData.map((item) => {
@@ -62,7 +68,7 @@ const DetailPage = () => {
               })}
               iconCode={item.weather[0].icon}
               temp={Math.round(item.main.temp)}
-              description={item.weather[0].description}
+              description={translate(item.weather[0].description)}
             />
           );
         })}

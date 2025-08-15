@@ -1,9 +1,11 @@
 import React from "react";
 import WeatherIcon from "./WeatherIcon";
 import DailyForecast from "./DailyForecast";
+import { useTranslation } from "react-i18next";
 import styles from "../styles/WeatherCard.module.css";
 
 const WeatherCard = ({ weatherData, forecastData }) => {
+  const { t: translate } = useTranslation();
   if (!weatherData || !weatherData.main || !weatherData.weather) {
     return <p>No weather data to display.</p>;
   }
@@ -20,7 +22,7 @@ const WeatherCard = ({ weatherData, forecastData }) => {
           <WeatherIcon iconCode={icon} className={styles.icon} size={80} />
           <div className={styles.tempContainer}>
             <p className={styles.temperature}>{temp}°C</p>
-            <p className={styles.description}>{description}</p>
+            <p className={styles.description}>{translate(description)}</p>
           </div>
         </div>
       </div>
