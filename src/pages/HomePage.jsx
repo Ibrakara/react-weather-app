@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import SearchBar from "../containers/SearchBar";
 import { useQuery } from "@tanstack/react-query";
 import { getCurrentWeather } from "../services/weatherService.js";
@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setCurrentWeather,
   setForecastList,
-} from "../store/slices/wheaterSlice.js";
+} from "../store/slices/weatherSlice.js";
+import { setSearchedLocation } from "../store/slices/locationSlice.js";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -19,10 +20,8 @@ function HomePage() {
   const userLongitude = useSelector(
     (state) => state.location.currentLocation?.longitude
   );
-  const [locationName, setLocationName] = useState("");
-  const handleSearch = (location) => {
-    setLocationName(location);
-  };
+  const locationName = useSelector((state) => state.location.searchedLocation);
+
   const {
     isLoading: cityIsLoading,
     data: cityData,
@@ -42,10 +41,23 @@ function HomePage() {
     isLoading: forecastIsLoading,
     data: forecastData,
     isSuccess: forecastIsSuccess,
+    error: forecastError,
   } = useWeeklyForecast(
     cityData?.coord?.lat,
     cityData?.coord?.lon,
     locationName
+  );
+  const isLoading = useMemo(
+    () => cityIsLoading || forecastIsLoading,
+    [cityIsLoading, forecastIsLoading]
+  );
+  const hasError = useMemo(
+    () => !!(cityError || forecastError),
+    [cityError, forecastError]
+  );
+  const isSuccess = useMemo(
+    () => cityIsSuccess && forecastIsSuccess,
+    [cityIsSuccess, forecastIsSuccess]
   );
   useEffect(() => {
     if (cityIsSuccess && cityData) {
@@ -60,10 +72,12 @@ function HomePage() {
 
   return (
     <>
-      <SearchBar onSearch={handleSearch} />
-      {cityIsLoading || (forecastIsLoading && <p>Loading...</p>)}
-      {cityError && <p>Error: {cityError.message}</p>}
-      {cityIsSuccess && cityData && forecastIsSuccess && forecastData && (
+      <SearchBar
+        onSearch={(location) => dispatch(setSearchedLocation(location))}
+      />
+      {isLoading && <p>Loading...</p>}
+      {hasError && <p>Error:{` ${cityError.response.data.message}`}</p>}
+      {isSuccess && (
         <WeatherCard forecastData={forecastData} weatherData={cityData} />
       )}
       {!cityIsLoading && !cityData && !cityError && (
