@@ -35,7 +35,6 @@ export const getThreeHourlyForecast = async (
   lon,
   units = "metric"
 ) => {
-  console.log("Fetching 3-hourly forecast for:", { city, lat, lon });
   try {
     const params = {
       units,
