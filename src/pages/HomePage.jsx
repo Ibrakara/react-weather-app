@@ -40,6 +40,8 @@ function HomePage() {
         : getCurrentWeather(null, userLatitude, userLongitude),
     staleTime: 1000 * 60 * 5,
     enabled: !!locationName || !!(userLatitude && userLongitude),
+    refetchInterval: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
     retry: false,
   });
   const {
