@@ -20,7 +20,7 @@ const DailyForecast = ({ data, locationName }) => {
             key={day.date}
             dateString={day.date}
             iconCode={day.icon}
-            temp={`${day.min}° - ${day.max}°`}
+            temp={`${day.min} - ${day.max}`}
           />
         </Link>
       ))}
