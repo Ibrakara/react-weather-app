@@ -51,7 +51,7 @@ const DetailPage = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.detailPage}>
       <h2 className={styles.title}>{locationName}</h2>
       <h3 className={styles.date}>{`${formattedDate}`}</h3>
       <Link to="/" className={styles.backLink}>
