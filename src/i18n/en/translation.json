@@ -75,8 +75,8 @@
   "squalls": "squalls",
   "tornado": "tornado",
   "clear sky": "clear sky",
-  "few clouds: 11–25%": "few clouds: 11–25%",
-  "scattered clouds: 25–50%": "scattered clouds: 25–50%",
-  "broken clouds: 51–84%": "broken clouds: 51–84%",
-  "overcast clouds: 85–100%": "overcast clouds: 85–100%"
+  "few clouds": "few clouds",
+  "scattered clouds": "scattered clouds",
+  "broken clouds": "broken clouds",
+  "overcast clouds": "overcast clouds"
 }
