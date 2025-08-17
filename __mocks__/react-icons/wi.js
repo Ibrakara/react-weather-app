@@ -1,4 +1,3 @@
-// __mocks__/react-icons/wi.js
 const React = require("react");
 
 const createMockIcon = (name) => (props) =>
