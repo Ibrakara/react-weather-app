@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import WeatherIcon from "./WeatherIcon";
 import DailyForecast from "./DailyForecast";
+import { IoMdClose } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import styles from "../styles/WeatherCard.module.css";
 import { useDispatch } from "react-redux";
@@ -30,8 +31,12 @@ const WeatherCard = ({
     <div className={styles.card}>
       {isRemovable && (
         <div className={styles.closeButtonContainer}>
-          <button className={styles.closeButton} onClick={handleRemove}>
-            X
+          <button
+            className={styles.closeButton}
+            onClick={handleRemove}
+            aria-label="Remove location"
+          >
+            <IoMdClose size={24} />
           </button>
         </div>
       )}

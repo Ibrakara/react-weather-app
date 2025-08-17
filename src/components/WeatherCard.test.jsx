@@ -79,7 +79,7 @@ describe("WeatherCard", () => {
       />
     );
     expect(
-      screen.queryByRole("button", { name: /X/i })
+      screen.queryByRole("button", { name: /Remove location/i })
     ).not.toBeInTheDocument();
   });
 
@@ -94,7 +94,7 @@ describe("WeatherCard", () => {
       />
     );
 
-    const closeButton = screen.getByRole("button", { name: /X/i });
+    const closeButton = screen.getByRole("button", { name: /Remove location/i });
     fireEvent.click(closeButton);
 
     expect(mockDispatch).toHaveBeenCalledTimes(1);
