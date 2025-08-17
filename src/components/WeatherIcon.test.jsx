@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import WeatherIcon from "./WeatherIcon";
 
-jest.mock("react-icons/wi", () => require("../../_mocks_/react-icons/wi"));
+jest.mock("react-icons/wi");
 
 describe("WeatherIcon", () => {
   test("renders the correct icon for a known code", () => {
