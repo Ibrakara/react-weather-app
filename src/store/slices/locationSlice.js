@@ -25,7 +25,6 @@ const locationSlice = createSlice({
     },
     addSearchedLocation: (state, action) => {
       state.searchedLocations?.push(action.payload);
-      console.log("Searched locations updated:", state.searchedLocations);
     },
     removeSearchedLocation: (state, action) => {
       state.searchedLocations = state.searchedLocations.filter(
