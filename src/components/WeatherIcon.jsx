@@ -37,11 +37,22 @@ const iconMap = {
   "50n": WiFog,
 };
 
-const WeatherIcon = ({ iconCode, className, ...props }) => {
+const WeatherIcon = ({
+  iconCode,
+  className,
+  dataTestId = "icon",
+  ...props
+}) => {
   const IconComponent = iconMap[iconCode] || WiNa;
   const iconClassName = `${styles.weatherIcon} ${className || ""}`;
 
-  return <IconComponent className={iconClassName} {...props} />;
+  return (
+    <IconComponent
+      data-testid={dataTestId}
+      className={iconClassName}
+      {...props}
+    />
+  );
 };
 
 export default memo(WeatherIcon);
