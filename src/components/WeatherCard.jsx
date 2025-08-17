@@ -3,9 +3,17 @@ import WeatherIcon from "./WeatherIcon";
 import DailyForecast from "./DailyForecast";
 import { useTranslation } from "react-i18next";
 import styles from "../styles/WeatherCard.module.css";
+import { useDispatch } from "react-redux";
+import { removeSearchedLocation } from "../store/slices/locationSlice";
 
-const WeatherCard = ({ weatherData, forecastData }) => {
+const WeatherCard = ({
+  weatherData,
+  forecastData,
+  isRemovable = true,
+  searchedName,
+}) => {
   const { t: translate } = useTranslation();
+  const dispatch = useDispatch();
   if (!weatherData || !weatherData.main || !weatherData.weather) {
     return <p>No weather data to display.</p>;
   }
@@ -14,8 +22,19 @@ const WeatherCard = ({ weatherData, forecastData }) => {
   const { temp } = main;
   const { description, icon } = weather[0];
 
+  const handleRemove = () => {
+    dispatch(removeSearchedLocation(searchedName));
+  };
+
   return (
     <div className={styles.card}>
+      {isRemovable && (
+        <div className={styles.closeButtonContainer}>
+          <button className={styles.closeButton} onClick={handleRemove}>
+            X
+          </button>
+        </div>
+      )}
       <div>
         <h2 className={styles.cityName}>{name}</h2>
         <div className={styles.weatherInfo}>
