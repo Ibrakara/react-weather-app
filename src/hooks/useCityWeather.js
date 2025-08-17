@@ -12,6 +12,8 @@ export function useCityWeather(
     queryFn: () => getCurrentWeather(locationName, lat, lon),
     staleTime: 1000 * 60 * 5,
     enabled: (!!lat && !!lon) || !!locationName,
+    refetchOnWindowFocus: true,
+    refetchInterval: 1000 * 60 * 5,
     retry: false,
   });
 }
