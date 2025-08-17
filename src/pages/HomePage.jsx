@@ -1,85 +1,139 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import SearchBar from "../containers/SearchBar";
-import { useQuery } from "@tanstack/react-query";
-import { getCurrentWeather } from "../services/weatherService.js";
-import WeatherCard from "../components/WeatherCard.jsx";
-import ErrorMessage from "../components/ErrorMessage.jsx";
-import { useWeeklyForecast } from "../hooks/useForecastList.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import {
-  setCurrentWeather,
-  setForecastList,
-} from "../store/slices/weatherSlice.js";
-import { setSearchedLocation } from "../store/slices/locationSlice.js";
-import { getErrorMessage } from "../services/helpers.js";
+  setSearchedLocation,
+  addSearchedLocation,
+  setCurrentLocation,
+} from "../store/slices/locationSlice.js";
 import styles from "../styles/HomePage.module.css";
+import WeatherCard from "../components/WeatherCard";
+import { useWeeklyForecast } from "../hooks/useForecastList.js";
+import { useCityWeather } from "../hooks/useCityWeather.js";
+import toast from "react-hot-toast";
 
 function HomePage() {
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
 
+  const searchedLocations = useSelector(
+    (state) => state.location.searchedLocations
+  );
+  const searchedLocation = useSelector(
+    (state) => state.location.searchedLocation
+  );
+  const currentLocation = useSelector(
+    (state) => state.location.currentLocation
+  );
   const userLatitude = useSelector(
-    (state) => state.location.currentLocation?.latitude
+    (state) => state.location.geoLocation?.latitude
   );
   const userLongitude = useSelector(
-    (state) => state.location.currentLocation?.longitude
+    (state) => state.location.geoLocation?.longitude
   );
-  const locationName = useSelector((state) => state.location.searchedLocation);
 
   const {
-    isLoading: cityIsLoading,
     data: cityData,
     error: cityError,
     isSuccess: cityIsSuccess,
-  } = useQuery({
-    queryKey: ["cityWeather", locationName, userLatitude, userLongitude],
-    queryFn: () =>
-      locationName
-        ? getCurrentWeather(locationName)
-        : getCurrentWeather(null, userLatitude, userLongitude),
-    staleTime: 1000 * 60 * 5,
-    enabled: !!locationName || !!(userLatitude && userLongitude),
-    refetchInterval: 1000 * 60 * 5,
-    refetchOnWindowFocus: false,
-    retry: false,
-  });
+  } = useCityWeather(null, null, searchedLocation, [
+    "cityWeather",
+    searchedLocation,
+  ]);
+
+  const { data: currentLocationData, isSuccess: currentLocationIsSuccess } =
+    useCityWeather(userLatitude, userLongitude, null, [
+      "currentLocationWeather",
+      userLatitude,
+      userLongitude,
+    ]);
+
   const {
-    isLoading: forecastIsLoading,
     data: forecastData,
     isSuccess: forecastIsSuccess,
     error: forecastError,
   } = useWeeklyForecast(
     cityData?.coord?.lat,
     cityData?.coord?.lon,
-    locationName
+    searchedLocation,
+    true,
+    [
+      "weeklyForecast",
+      cityData?.coord?.lat,
+      cityData?.coord?.lon,
+      searchedLocation,
+    ]
   );
-  const isLoading = useMemo(
-    () => cityIsLoading || forecastIsLoading,
-    [cityIsLoading, forecastIsLoading]
+
+  const {
+    data: currentLocationForecastData,
+    isSuccess: currentLocationForecastIsSuccess,
+  } = useWeeklyForecast(
+    currentLocationData?.coord?.lat,
+    currentLocationData?.coord?.lon,
+    null,
+    true,
+    [
+      "weeklyForecast",
+      currentLocationData?.coord?.lat,
+      currentLocationData?.coord?.lon,
+    ]
   );
+
   const hasError = useMemo(
     () => !!(cityError || forecastError),
     [cityError, forecastError]
   );
-  const errorMessage = useMemo(
-    () => getErrorMessage(cityError, forecastError),
-    [cityError, forecastError]
-  );
+
   const isSuccess = useMemo(
     () => cityIsSuccess && forecastIsSuccess,
     [cityIsSuccess, forecastIsSuccess]
   );
+
   useEffect(() => {
-    if (cityIsSuccess && cityData) {
-      dispatch(setCurrentWeather(cityData));
+    if (hasError) {
+      toast.error(translate("City not found"));
     }
-  }, [cityIsSuccess, cityData, dispatch]);
+  }, [hasError, searchedLocation]);
+
   useEffect(() => {
-    if (forecastIsSuccess && forecastData) {
-      dispatch(setForecastList(forecastData));
+    if (!isSuccess || !searchedLocation || !cityData || !forecastData) {
+      return;
     }
-  }, [forecastIsSuccess, forecastData, dispatch]);
+    if (
+      searchedLocations?.some(
+        (location) => location.locationName === searchedLocation
+      )
+    ) {
+      console.log("Location already exists:", searchedLocation);
+      return;
+    }
+    dispatch(
+      addSearchedLocation({
+        locationName: searchedLocation,
+        cityData: cityData,
+        forecastData: forecastData,
+      })
+    );
+  }, [isSuccess, searchedLocation, cityData, forecastData]);
+
+  useEffect(() => {
+    if (currentLocationIsSuccess && currentLocationForecastIsSuccess) {
+      dispatch(
+        setCurrentLocation({
+          locationName: "currentLocation",
+          cityData: currentLocationData,
+          forecastData: currentLocationForecastData,
+        })
+      );
+    }
+  }, [
+    currentLocationIsSuccess,
+    currentLocationData,
+    currentLocationForecastIsSuccess,
+    currentLocationForecastData,
+  ]);
 
   return (
     <div className={styles.homePage}>
@@ -87,14 +141,20 @@ function HomePage() {
         onSearch={(location) => dispatch(setSearchedLocation(location))}
         placeholder={translate("search placeholder")}
       />
-      {isLoading && <p>{translate("loading")}</p>}
-      {hasError && <ErrorMessage message={errorMessage} />}
-      {isSuccess && (
-        <WeatherCard forecastData={forecastData} weatherData={cityData} />
-      )}
-      {!cityIsLoading && !cityData && !cityError && (
-        <p>{translate("No weather data available")}.</p>
-      )}
+      <WeatherCard
+        forecastData={currentLocation?.forecastData}
+        weatherData={currentLocation?.cityData}
+        isRemovable={false}
+      />
+      {searchedLocations?.map((location) => (
+        <WeatherCard
+          key={location.locationName}
+          forecastData={location.forecastData}
+          weatherData={location.cityData}
+          isRemovable={true}
+          searchedName={location.locationName}
+        />
+      ))}
     </div>
   );
 }
