@@ -14,30 +14,34 @@ import {
   WiFog,
   WiNa,
 } from "react-icons/wi";
+import styles from "../styles/WeatherIcon.module.css";
 
-const WeatherIcon = ({ iconCode, ...props }) => {
-  const iconMap = {
-    "01d": <WiDaySunny {...props} />,
-    "01n": <WiNightClear {...props} />,
-    "02d": <WiDayCloudy {...props} />,
-    "02n": <WiNightAltCloudy {...props} />,
-    "03d": <WiCloud {...props} />,
-    "03n": <WiCloud {...props} />,
-    "04d": <WiCloudy {...props} />,
-    "04n": <WiCloudy {...props} />,
-    "09d": <WiShowers {...props} />,
-    "09n": <WiShowers {...props} />,
-    "10d": <WiDayRain {...props} />,
-    "10n": <WiNightAltRain {...props} />,
-    "11d": <WiThunderstorm {...props} />,
-    "11n": <WiThunderstorm {...props} />,
-    "13d": <WiSnow {...props} />,
-    "13n": <WiSnow {...props} />,
-    "50d": <WiFog {...props} />,
-    "50n": <WiFog {...props} />,
-  };
+const iconMap = {
+  "01d": WiDaySunny,
+  "01n": WiNightClear,
+  "02d": WiDayCloudy,
+  "02n": WiNightAltCloudy,
+  "03d": WiCloud,
+  "03n": WiCloud,
+  "04d": WiCloudy,
+  "04n": WiCloudy,
+  "09d": WiShowers,
+  "09n": WiShowers,
+  "10d": WiDayRain,
+  "10n": WiNightAltRain,
+  "11d": WiThunderstorm,
+  "11n": WiThunderstorm,
+  "13d": WiSnow,
+  "13n": WiSnow,
+  "50d": WiFog,
+  "50n": WiFog,
+};
 
-  return iconMap[iconCode] || <WiNa {...props} />;
+const WeatherIcon = ({ iconCode, className, ...props }) => {
+  const IconComponent = iconMap[iconCode] || WiNa;
+  const iconClassName = `${styles.weatherIcon} ${className || ""}`;
+
+  return <IconComponent className={iconClassName} {...props} />;
 };
 
 export default memo(WeatherIcon);
