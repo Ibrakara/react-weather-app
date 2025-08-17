@@ -78,7 +78,13 @@ function HomePage() {
       })
     );
     toast.success(translate("Location added successfully"));
-  }, [searchedLocation, searchedWeatherData, searchedForecastData, dispatch]);
+  }, [
+    searchedLocation,
+    searchedWeatherData,
+    searchedForecastData,
+    dispatch,
+    searchedIsSuccess,
+  ]);
 
   useEffect(() => {
     if (currentLocationIsSuccess) {
@@ -113,6 +119,7 @@ function HomePage() {
       />
       {currentLocation && (
         <WeatherCard
+          key="currentLocation"
           forecastData={currentLocation?.forecastData}
           weatherData={currentLocation?.cityData}
           isRemovable={false}
