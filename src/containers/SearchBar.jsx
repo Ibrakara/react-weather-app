@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/SearchBar.module.css";
-import { useSelector } from "react-redux";
 
 function SearchBar({
   onSearch,
@@ -9,9 +8,6 @@ function SearchBar({
   onChange,
 }) {
   const [debouncedText, setDebouncedText] = useState("");
-  const searchedLocations = useSelector(
-    (state) => state.location.searchedLocations
-  );
 
   const handleInputChange = (e) => {
     onChange(e.target.value);
@@ -27,7 +23,7 @@ function SearchBar({
 
   useEffect(() => {
     onSearch(debouncedText);
-  }, [debouncedText]);
+  }, [debouncedText, onSearch]);
 
   return (
     <form className={styles.searchBar} onSubmit={(e) => e.preventDefault()}>
