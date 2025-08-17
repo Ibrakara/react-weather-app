@@ -6,6 +6,8 @@
   "search placeholder": "Buscar una ciudad...",
   "back to overview": "Volver a la vista general",
   "City not found": "Ciudad no encontrada",
+  "City added successfully": "Ciudad añadida con éxito",
+  "Location already exists": "La ubicación ya existe",
   "thunderstorm with light rain": "tormenta con lluvia ligera",
   "thunderstorm with rain": "tormenta con lluvia",
   "thunderstorm with heavy rain": "tormenta con lluvia intensa",
