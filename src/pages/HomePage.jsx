@@ -53,7 +53,7 @@ function HomePage() {
   }, [searchedError, searchedLocation]);
 
   useEffect(() => {
-    console.log("Searched Location:", searchedLocation);
+    
     if (
       !searchedIsSuccess ||
       !searchedLocation ||
