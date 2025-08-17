@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/DailyForecast.module.css";
 import ForecastCard from "./ForecastCard";
@@ -28,4 +28,4 @@ const DailyForecast = ({ data, locationName }) => {
   );
 };
 
-export default DailyForecast;
+export default memo(DailyForecast);

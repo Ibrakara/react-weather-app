@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import WeatherIcon from "./WeatherIcon";
 import styles from "../styles/ForecastCard.module.css";
 
@@ -15,4 +15,4 @@ function ForecastCard({ dateString, iconCode, temp, description }) {
   );
 }
 
-export default ForecastCard;
+export default memo(ForecastCard);

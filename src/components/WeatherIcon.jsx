@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   WiDaySunny,
   WiNightClear,
@@ -40,4 +40,4 @@ const WeatherIcon = ({ iconCode, ...props }) => {
   return iconMap[iconCode] || <WiNa {...props} />;
 };
 
-export default WeatherIcon;
+export default memo(WeatherIcon);

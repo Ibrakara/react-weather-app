@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import WeatherIcon from "./WeatherIcon";
 import DailyForecast from "./DailyForecast";
 import { useTranslation } from "react-i18next";
@@ -50,4 +50,4 @@ const WeatherCard = ({
   );
 };
 
-export default WeatherCard;
+export default memo(WeatherCard);
