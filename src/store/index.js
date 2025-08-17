@@ -24,7 +24,7 @@ export const store = configureStore({
       localStorageMiddleware
     ),
   preloadedState,
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: import.meta.env.DEV,
 });
 
 if (preloadedState?.language?.language) {
