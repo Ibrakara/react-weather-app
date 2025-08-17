@@ -1,0 +1,42 @@
+.errorPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 20px;
+}
+
+.errorCode {
+  font-size: 8em;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.errorTitle {
+  font-size: 2.5em;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.homeLink {
+  margin-top: 30px;
+  padding: 12px 25px;
+  background-color: var(--primary-color);
+  color: var(--button-text-color);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.homeLink:hover {
+  background-color: var(--primary-color-dark);
+  transform: translateY(-2px);
+}
