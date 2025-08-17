@@ -24,12 +24,12 @@ A modern, feature-rich weather application built with React, Vite, and Redux Too
 - **Frontend:** React
 - **Build Tool:** Vite
 - **State Management:** Redux Toolkit
-- **Data Fetching:**
-  - RTK Query for streamlined API requests and caching.
-  - @tanstack/react-query for server state management.
+- **Data Fetching:** Axios, @tanstack/react-query
 - **Internationalization:** i18next with react-i18next
 - **Styling:** CSS Modules
 - **Icons:** React Icons
+- **Testing:** Jest
+- **Linting:** ESLint
 
 ---
 
@@ -83,24 +83,45 @@ Follow these instructions to get a local copy of the project up and running.
 
 ---
 
+## 🧪 Testing
+
+To run the test suite and ensure all components and functionalities are working as expected, use the following command:
+
+```sh
+npm test
+```
+
+---
+
 ## 📁 Project Structure
 
 The project follows a standard React application structure, organized for clarity and scalability.
 
 ```
-src/
-├── components/     # Reusable, presentational components
-├── containers/     # More complex components with logic
-├── hooks/          # Custom React hooks
-├── i18n/           # Internationalization configuration and translations
-├── pages/          # Page components for different routes
-├── services/       # API services, helpers, and localStorage logic
-├── store/          # Redux Toolkit store, slices, and RTK Query APIs
-│   ├── services/   # RTK Query API definitions
-│   └── slices/     # Redux state slices
-├── styles/         # Global styles and CSS modules
-├── App.jsx         # Root application component with routing setup
-└── main.jsx        # Application entry point
+.
+├── __mocks__/
+│   ├── react-icons/
+│   └── src/
+│       └── services/
+├── public/
+└── src/
+    ├── assets/
+    ├── components/
+    ├── constants/
+    ├── containers/
+    ├── hooks/
+    ├── i18n/
+    │   ├── en/
+    │   └── es/
+    ├── pages/
+    ├── routes/
+    ├── services/
+    ├── store/
+    │   ├── middleware/
+    │   └── slices/
+    ├── styles/
+    └── test-utils/
+        └── mocks/
 ```
 
 ---
