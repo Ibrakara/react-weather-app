@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../store/slices/themeSlice";
@@ -28,7 +29,9 @@ function Header() {
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.title}>Weather App</h1>
+      <Link to="/" className={styles.titleLink}>
+        <h1 className={styles.title}>Weather App</h1>
+      </Link>
       <div className={styles.actions}>
         <CustomButton onClick={handleThemeToggle} title="Toggle Theme">
           {theme === "light" ? <FaMoon /> : <FaSun />}

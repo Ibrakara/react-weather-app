@@ -42,3 +42,8 @@
   border-radius: 50%;
   box-shadow: 0 0 5px var(--card-icon);
 }
+
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+}
