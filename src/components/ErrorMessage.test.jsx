@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import ErrorMessage from "./ErrorMessage";
 import React from "react";
 
-// Mock the react-icons/fa component
 jest.mock("react-icons/fa", () => ({
   FaExclamationTriangle: ({ className }) => (
     <div data-testid="mock-exclamation-icon" className={className}></div>
@@ -28,6 +27,8 @@ describe("ErrorMessage", () => {
     const errorContainer = screen.getByText(testMessage).closest("div");
     expect(errorContainer).toHaveClass("errorContainer");
     expect(screen.getByText(testMessage)).toHaveClass("errorMessage");
-    expect(screen.getByTestId("mock-exclamation-icon")).toHaveClass("errorIcon");
+    expect(screen.getByTestId("mock-exclamation-icon")).toHaveClass(
+      "errorIcon"
+    );
   });
 });

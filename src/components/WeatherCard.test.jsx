@@ -59,12 +59,10 @@ describe("WeatherCard", () => {
     expect(screen.getByText("15°C")).toBeInTheDocument();
     expect(screen.getByText("clear sky")).toBeInTheDocument();
 
-    // Check WeatherIcon props
     const weatherIcon = screen.getByTestId("mock-weather-icon");
     expect(weatherIcon).toBeInTheDocument();
     expect(weatherIcon).toHaveTextContent("MockWeatherIcon - 01d - 80");
 
-    // Check DailyForecast props
     const dailyForecast = screen.getByTestId("mock-daily-forecast");
     expect(dailyForecast).toBeInTheDocument();
     expect(dailyForecast).toHaveTextContent(
