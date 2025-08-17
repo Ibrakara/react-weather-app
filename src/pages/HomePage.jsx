@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import SearchBar from "../containers/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 function HomePage() {
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
+  const [searchText, setSearchText] = useState("");
 
   const searchedLocations = useSelector(
     (state) => state.location.searchedLocations
@@ -54,16 +55,12 @@ function HomePage() {
     isSuccess: forecastIsSuccess,
     error: forecastError,
   } = useWeeklyForecast(
-    cityData?.coord?.lat,
-    cityData?.coord?.lon,
+    null,
+    null,
     searchedLocation,
     true,
-    [
-      "weeklyForecast",
-      cityData?.coord?.lat,
-      cityData?.coord?.lon,
-      searchedLocation,
-    ]
+    ["weeklyForecast", searchedLocation],
+    !!searchedLocation
   );
 
   const {
@@ -75,10 +72,11 @@ function HomePage() {
     null,
     true,
     [
-      "weeklyForecast",
+      "currentLocationForecast",
       currentLocationData?.coord?.lat,
       currentLocationData?.coord?.lon,
-    ]
+    ],
+    !!currentLocationData?.coord?.lat && !!currentLocationData?.coord?.lon
   );
 
   const hasError = useMemo(
@@ -106,7 +104,7 @@ function HomePage() {
         (location) => location.locationName === searchedLocation
       )
     ) {
-      console.log("Location already exists:", searchedLocation);
+      toast.error(translate("Location already exists"));
       return;
     }
     dispatch(
@@ -116,7 +114,8 @@ function HomePage() {
         forecastData: forecastData,
       })
     );
-  }, [isSuccess, searchedLocation, cityData, forecastData]);
+    toast.success(translate("Location added successfully"));
+  }, [isSuccess, searchedLocation, cityData, forecastData, dispatch]);
 
   useEffect(() => {
     if (currentLocationIsSuccess && currentLocationForecastIsSuccess) {
@@ -134,18 +133,27 @@ function HomePage() {
     currentLocationForecastIsSuccess,
     currentLocationForecastData,
   ]);
+  useEffect(() => {
+    return () => {
+      dispatch(setSearchedLocation(null));
+    };
+  }, []);
 
   return (
     <div className={styles.homePage}>
       <SearchBar
+        value={searchText}
+        onChange={setSearchText}
         onSearch={(location) => dispatch(setSearchedLocation(location))}
         placeholder={translate("search placeholder")}
       />
-      <WeatherCard
-        forecastData={currentLocation?.forecastData}
-        weatherData={currentLocation?.cityData}
-        isRemovable={false}
-      />
+      {currentLocation && (
+        <WeatherCard
+          forecastData={currentLocation?.forecastData}
+          weatherData={currentLocation?.cityData}
+          isRemovable={false}
+        />
+      )}
       {searchedLocations?.map((location) => (
         <WeatherCard
           key={location.locationName}
