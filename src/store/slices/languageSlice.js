@@ -29,8 +29,11 @@ export const { setLanguage, toggleLanguage } = languageSlice.actions;
 
 languageListenerMiddleware.startListening({
   actionCreator: setLanguage,
-  effect: (action) => {
-    i18n.changeLanguage(action.payload);
+  effect: (action, listenerApi) => {
+    const currentLanguage = listenerApi.getState().language.language;
+    if (currentLanguage === action.payload) {
+      i18n.changeLanguage(action.payload);
+    }
   },
 });
 
