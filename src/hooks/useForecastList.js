@@ -7,14 +7,14 @@ export function useWeeklyForecast(
   lon,
   locationName,
   processData = true,
-  queryKey = ["weeklyForecast", lat, lon, locationName]
+  queryKey = ["weeklyForecast", lat, lon, locationName],
+  enabled = true
 ) {
-  console.log(queryKey[0]);
   return useQuery({
     queryKey: queryKey,
     queryFn: () => getThreeHourlyForecast(locationName, lat, lon),
     staleTime: 1000 * 60 * 5,
-    enabled: (!!lat && !!lon) || !!locationName,
+    enabled: enabled,
     retry: false,
     select: processData ? getDailyForecast : undefined,
   });
