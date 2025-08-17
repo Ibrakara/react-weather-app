@@ -3,24 +3,44 @@ import { createSlice } from "@reduxjs/toolkit";
 const locationSlice = createSlice({
   name: "location",
   initialState: {
+    geoLocation: null,
     currentLocation: null,
-    searchedLocation: "",
+    searchedLocations: [],
+    searchedLocation: null,
     error: null,
   },
   reducers: {
-    setLocation: (state, action) => {
-      state.currentLocation = action.payload;
+    setGeoLocation: (state, action) => {
+      state.geoLocation = action.payload;
       state.error = null;
     },
-    setLocationError: (state, action) => {
+    setCurrentLocation: (state, action) => {
+      state.currentLocation = action.payload;
+    },
+    setGeoLocationError: (state, action) => {
       state.error = action.payload;
     },
     setSearchedLocation: (state, action) => {
       state.searchedLocation = action.payload;
     },
+    addSearchedLocation: (state, action) => {
+      state.searchedLocations?.push(action.payload);
+      console.log("Searched locations updated:", state.searchedLocations);
+    },
+    removeSearchedLocation: (state, action) => {
+      state.searchedLocations = state.searchedLocations.filter(
+        (location) => location.locationName !== action.payload
+      );
+    },
   },
 });
 
-export const { setLocation, setSearchedLocation, setLocationError } =
-  locationSlice.actions;
+export const {
+  setGeoLocation,
+  setCurrentLocation,
+  addSearchedLocation,
+  removeSearchedLocation,
+  setGeoLocationError,
+  setSearchedLocation,
+} = locationSlice.actions;
 export default locationSlice.reducer;

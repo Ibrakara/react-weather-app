@@ -31,6 +31,11 @@ store.subscribe(() => {
   saveState({
     theme: store.getState().theme,
     language: store.getState().language,
-    location: { ...store.getState().location, currentLocation: null },
+    location: {
+      ...store.getState().location,
+      geoLocation: null,
+      searchedLocation: null,
+      currentLocation: null,
+    },
   });
 });

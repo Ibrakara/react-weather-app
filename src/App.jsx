@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setLocation, setLocationError } from "./store/slices/locationSlice";
+import {
+  setGeoLocation,
+  setGeoLocationError,
+} from "./store/slices/locationSlice";
 import Header from "./containers/Header";
 import { Outlet } from "react-router-dom";
 import "./App.css";
@@ -15,20 +18,20 @@ const App = () => {
           (position) => {
             const { latitude, longitude } = position.coords;
             dispatch(
-              setLocation({
+              setGeoLocation({
                 latitude: latitude.toFixed(2),
                 longitude: longitude.toFixed(2),
               })
             );
           },
           (error) => {
-            dispatch(setLocationError(error.message));
+            dispatch(setGeoLocationError(error.message));
             console.log(error.message);
           }
         );
       } else {
         dispatch(
-          setLocationError("Geolocation is not supported by this browser.")
+          setGeoLocationError("Geolocation is not supported by this browser.")
         );
       }
     };
