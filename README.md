@@ -47,7 +47,7 @@ Follow these instructions to get a local copy of the project up and running.
 1.  **Clone the repository:**
 
     ```sh
-    git clone https://github.com/your-username/react-weather-app.git
+    git clone https://github.com/Ibrakara/react-weather-app
     cd react-weather-app
     ```
 
