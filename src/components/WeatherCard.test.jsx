@@ -19,12 +19,6 @@ jest.mock("./DailyForecast", () => {
   );
 });
 
-jest.mock("react-i18next", () => ({
-  useTranslation: () => ({
-    t: (key) => key,
-  }),
-}));
-
 const mockDispatch = jest.fn();
 jest.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
