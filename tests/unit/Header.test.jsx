@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import Header from "./Header";
+import Header from "@src/containers/Header";
 import React from "react";
-import { setLanguage } from "../store/slices/languageSlice";
-import { setTheme, toggleTheme } from "../store/slices/themeSlice";
+import { setLanguage } from "@src/store/slices/languageSlice";
+import { setTheme, toggleTheme } from "@src/store/slices/themeSlice";
 
 const mockDispatch = jest.fn();
 jest.mock("react-redux", () => ({
@@ -14,11 +14,11 @@ jest.mock("react-router-dom", () => ({
   Link: ({ to, children }) => <a href={to}>{children}</a>,
 }));
 
-jest.mock("../store/slices/languageSlice", () => ({
+jest.mock("@src/store/slices/languageSlice", () => ({
   setLanguage: jest.fn(),
 }));
 
-jest.mock("../store/slices/themeSlice", () => ({
+jest.mock("@src/store/slices/themeSlice", () => ({
   setTheme: jest.fn(),
   toggleTheme: jest.fn(),
 }));

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCurrentWeather, getThreeHourlyForecast } from '../../__mocks__/src/services/weatherService';
+import { getCurrentWeather, getThreeHourlyForecast } from '@src/services/weatherService';
 
 jest.mock('axios');
 

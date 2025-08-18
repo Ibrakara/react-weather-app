@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import CustomButton from "./CustomButton";
+import CustomButton from "@src/components/CustomButton";
 
 describe("CustomButton", () => {
   test("renders children text", () => {

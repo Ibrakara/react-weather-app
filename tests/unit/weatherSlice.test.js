@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import weatherReducer, { setCurrentWeather, setForecastList } from './weatherSlice';
+import weatherReducer, { setCurrentWeather, setForecastList } from '@src/store/slices/weatherSlice';
 
 describe('weatherSlice', () => {
   let store;

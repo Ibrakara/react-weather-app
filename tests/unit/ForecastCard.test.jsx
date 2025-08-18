@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import ForecastCard from "./ForecastCard";
+import ForecastCard from "@src/components/ForecastCard";
 import React from "react";
 
-jest.mock("./WeatherIcon", () => {
+jest.mock("@src/components/WeatherIcon", () => {
   return ({ iconCode, size, className }) => (
     <div data-testid="mock-weather-icon" className={className}>
       MockWeatherIcon - {iconCode} - {size}

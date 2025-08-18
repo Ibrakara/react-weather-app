@@ -6,7 +6,7 @@ import locationReducer, {
   removeSearchedLocation,
   setGeoLocationError,
   setSearchedLocation,
-} from './locationSlice';
+} from '@src/store/slices/locationSlice';
 
 describe('locationSlice', () => {
   let store;

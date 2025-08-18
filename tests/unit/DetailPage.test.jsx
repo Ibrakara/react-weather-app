@@ -2,9 +2,9 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import DetailPage from "./DetailPage";
-import { useWeeklyForecast } from "../hooks/useForecastList";
-import { getErrorMessage } from "../services/helpers";
+import DetailPage from "@src/pages/DetailPage";
+import { useWeeklyForecast } from "@src/hooks/useForecastList";
+import { getErrorMessage } from "@src/services/helpers";
 
 jest.mock("react-router-dom", () => ({
   useParams: jest.fn(),
@@ -15,15 +15,15 @@ jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
 }));
 
-jest.mock("../hooks/useForecastList", () => ({
+jest.mock("@src/hooks/useForecastList", () => ({
   useWeeklyForecast: jest.fn(),
 }));
 
-jest.mock("../services/helpers", () => ({
+jest.mock("@src/services/helpers", () => ({
   getErrorMessage: jest.fn(),
 }));
 
-jest.mock("../components/ForecastCard", () => {
+jest.mock("@src/components/ForecastCard", () => {
   return ({ dateString, iconCode, temp, humidity, windSpeed, description }) => (
     <div data-testid="mock-forecast-card">
       MockForecastCard - {dateString} - {iconCode} - {temp} - {humidity} - {windSpeed} - {description}

@@ -4,8 +4,6 @@ import { Provider as StoreProvider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-import router from "../src/routes/index.jsx";
-import { store } from "../src/store/index.js";
 
 jest.mock("react-dom/client", () => ({
   createRoot: jest.fn(() => ({
@@ -51,7 +49,10 @@ describe("main.jsx", () => {
   });
 
   test("renders the App into the root element", () => {
-    require("./main.jsx");
+    // Import main.jsx and its dependencies here, after DOM setup
+    const router = require("@src/routes/index.jsx").default;
+    const { store } = require("@src/store/index.js");
+    require("@src/main.jsx");
 
     expect(createRoot).toHaveBeenCalledWith(rootElement);
 

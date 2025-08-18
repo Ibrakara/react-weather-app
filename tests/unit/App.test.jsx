@@ -2,11 +2,11 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
-import App from "./App";
+import App from "@src/App";
 import {
   setGeoLocation,
   setGeoLocationError,
-} from "./store/slices/locationSlice";
+} from "@src/store/slices/locationSlice";
 
 jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),

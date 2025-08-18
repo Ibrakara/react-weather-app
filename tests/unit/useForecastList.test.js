@@ -1,20 +1,20 @@
 import { renderHook, act } from "@testing-library/react";
 import { useQuery } from "@tanstack/react-query";
-import { useWeeklyForecast } from "./useForecastList";
+import { useWeeklyForecast } from "@src/hooks/useForecastList";
 
 jest.mock("@tanstack/react-query", () => ({
   useQuery: jest.fn(),
 }));
 
-jest.mock("../services/weatherService", () => ({
+jest.mock("@src/services/weatherService", () => ({
   getThreeHourlyForecast: jest.fn(),
 }));
-jest.mock("../services/helpers", () => ({
+jest.mock("@src/services/helpers", () => ({
   getDailyForecast: jest.fn(),
 }));
 
-import { getThreeHourlyForecast } from "../services/weatherService";
-import { getDailyForecast } from "../services/helpers";
+import { getThreeHourlyForecast } from "@src/services/weatherService";
+import { getDailyForecast } from "@src/services/helpers";
 
 describe("useWeeklyForecast", () => {
   beforeEach(() => {

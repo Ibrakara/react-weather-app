@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "@src/components/ErrorMessage";
 import React from "react";
 
 jest.mock("react-icons/fa", () => ({

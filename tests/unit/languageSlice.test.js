@@ -3,11 +3,11 @@ import languageReducer, {
   setLanguage,
   toggleLanguage,
   languageListenerMiddleware,
-} from "./languageSlice";
-import { languages } from "../../constants";
-import i18n from "../../i18n/index";
+} from "@src/store/slices/languageSlice";
+import { languages } from "@src/constants";
+import i18n from "@src/i18n/index";
 
-jest.mock("../../i18n/index", () => ({
+jest.mock("@src/i18n/index", () => ({
   changeLanguage: jest.fn(),
 }));
 

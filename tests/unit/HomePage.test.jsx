@@ -1,16 +1,16 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
-import HomePage from "./HomePage";
-import { useWeatherAndForecast } from "../hooks/useWeatherAndForecast";
+import HomePage from "@src/pages/HomePage";
+import { useWeatherAndForecast } from "@src/hooks/useWeatherAndForecast";
 import toast from "react-hot-toast";
 import {
   setSearchedLocation,
   addSearchedLocation,
   setCurrentLocation,
-} from "../store/slices/locationSlice";
+} from "@src/store/slices/locationSlice";
 
-jest.mock("../containers/SearchBar", () => ({
+jest.mock("@src/containers/SearchBar", () => ({
   __esModule: true,
   default: ({ onSearch, onChange, value, placeholder }) => (
     <div>
@@ -26,7 +26,7 @@ jest.mock("../containers/SearchBar", () => ({
     </div>
   ),
 }));
-jest.mock("../components/WeatherCard", () => ({
+jest.mock("@src/components/WeatherCard", () => ({
   __esModule: true,
   default: ({ weatherData, forecastData, isRemovable, searchedName }) => (
     <div data-testid="weather-card">
@@ -47,7 +47,7 @@ jest.mock("react-hot-toast", () => ({
   success: jest.fn(),
 }));
 
-jest.mock("../hooks/useWeatherAndForecast", () => ({
+jest.mock("@src/hooks/useWeatherAndForecast", () => ({
   useWeatherAndForecast: jest.fn(),
 }));
 

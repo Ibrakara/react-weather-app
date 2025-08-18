@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import WeatherCard from "./WeatherCard";
+import WeatherCard from "@src/components/WeatherCard";
 import React from "react";
-import { removeSearchedLocation } from "../store/slices/locationSlice";
+import { removeSearchedLocation } from "@src/store/slices/locationSlice";
 
-jest.mock("./WeatherIcon", () => {
+jest.mock("@src/components/WeatherIcon", () => {
   return ({ iconCode, size, className }) => (
     <div data-testid="mock-weather-icon" className={className}>
       MockWeatherIcon - {iconCode} - {size}
@@ -11,7 +11,7 @@ jest.mock("./WeatherIcon", () => {
   );
 });
 
-jest.mock("./DailyForecast", () => {
+jest.mock("@src/components/DailyForecast", () => {
   return ({ data, locationName }) => (
     <div data-testid="mock-daily-forecast">
       MockDailyForecast - {locationName} - {data ? data.length : 0} items
@@ -24,7 +24,7 @@ jest.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
 }));
 
-jest.mock("../store/slices/locationSlice", () => ({
+jest.mock("@src/store/slices/locationSlice", () => ({
   removeSearchedLocation: jest.fn((payload) => ({
     type: "LOCATION_REMOVE",
     payload,

@@ -1,13 +1,13 @@
 import { renderHook, act } from "@testing-library/react";
 import { useQuery } from "@tanstack/react-query";
-import { useCityWeather } from "./useCityWeather";
-import { getCurrentWeather } from "../services/weatherService";
+import { useCityWeather } from "@src/hooks/useCityWeather";
+import { getCurrentWeather } from "@src/services/weatherService";
 
 jest.mock("@tanstack/react-query", () => ({
   useQuery: jest.fn(),
 }));
 
-jest.mock("../services/weatherService", () => ({
+jest.mock("@src/services/weatherService", () => ({
   getCurrentWeather: jest.fn(),
 }));
 

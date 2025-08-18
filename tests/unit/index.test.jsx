@@ -1,29 +1,29 @@
 import { createBrowserRouter } from "react-router-dom";
-import "./index.jsx";
+import router from "@src/routes/index.jsx";
 
 jest.mock(
-  "../App",
+  "@src/App",
   () =>
     function App() {
       return <div>Mocked App</div>;
     }
 );
 jest.mock(
-  "../pages/HomePage",
+  "@src/pages/HomePage",
   () =>
     function HomePage() {
       return <div>Mocked HomePage</div>;
     }
 );
 jest.mock(
-  "../pages/DetailPage",
+  "@src/pages/DetailPage",
   () =>
     function DetailPage() {
       return <div>Mocked DetailPage</div>;
     }
 );
 jest.mock(
-  "../pages/ErrorPage",
+  "@src/pages/ErrorPage",
   () =>
     function ErrorPage() {
       return <div>Mocked ErrorPage</div>;

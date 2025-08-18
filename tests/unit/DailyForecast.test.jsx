@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import DailyForecast from "./DailyForecast";
+import DailyForecast from "@src/components/DailyForecast";
 import React from "react";
-import dailyForecastMockData from "../test-utils/mocks/dailyForecastMockData";
+import dailyForecastMockData from "@src/test-utils/mocks/dailyForecastMockData";
 
 jest.mock("react-router-dom", () => ({
   Link: ({ to, children, className }) => (
@@ -11,7 +11,7 @@ jest.mock("react-router-dom", () => ({
   ),
 }));
 
-jest.mock("./ForecastCard", () => {
+jest.mock("@src/components/ForecastCard", () => {
   return ({ dateString, iconCode, temp, description }) => (
     <div data-testid="mock-forecast-card">
       <span data-testid="mock-date-string">{dateString}</span>
@@ -22,7 +22,7 @@ jest.mock("./ForecastCard", () => {
   );
 });
 
-jest.mock("../styles/DailyForecast.module.css", () => ({
+jest.mock("@src/styles/DailyForecast.module.css", () => ({
   forecastContainer: "forecastContainer",
   dayLink: "dayLink",
 }));

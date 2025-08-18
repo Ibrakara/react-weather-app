@@ -3,7 +3,7 @@ import {
   loadState,
   saveState,
   getErrorMessage,
-} from "./helpers";
+} from "@src/services/helpers";
 
 describe("getDailyForecast", () => {
   test("should correctly aggregate daily forecast data", () => {

@@ -1,10 +1,10 @@
 import { renderHook } from "@testing-library/react";
-import { useWeatherAndForecast } from "./useWeatherAndForecast";
-import { useCityWeather } from "./useCityWeather";
-import { useWeeklyForecast } from "./useForecastList";
+import { useWeatherAndForecast } from "@src/hooks/useWeatherAndForecast";
+import { useCityWeather } from "@src/hooks/useCityWeather";
+import { useWeeklyForecast } from "@src/hooks/useForecastList";
 
-jest.mock("./useCityWeather");
-jest.mock("./useForecastList");
+jest.mock("@src/hooks/useCityWeather");
+jest.mock("@src/hooks/useForecastList");
 
 describe("useWeatherAndForecast", () => {
   beforeEach(() => {
