@@ -16,6 +16,7 @@ A modern, feature-rich weather application built with React, Vite, and Redux Too
 - **Multi-language Support:** Fully internationalized using `i18next`, with support for English and Spanish.
 - **State Persistence:** User preferences for theme and language are saved to `localStorage` for a consistent experience across sessions.
 - **Error Handling:** Gracefully displays informative error messages for failed API requests or geolocation errors.
+- **Toast Notifications:** Provides user feedback through toast notifications.
 
 ---
 
@@ -24,11 +25,13 @@ A modern, feature-rich weather application built with React, Vite, and Redux Too
 - **Frontend:** React
 - **Build Tool:** Vite
 - **State Management:** Redux Toolkit
+- **Routing:** React Router
 - **Data Fetching:** Axios, @tanstack/react-query
 - **Internationalization:** i18next with react-i18next
 - **Styling:** CSS Modules
-- **Icons:** React Icons
-- **Testing:** Jest
+- **Icons:** React Icons, Flag Icons
+- **Notifications:** React Hot Toast
+- **Testing:** Jest & React Testing Library
 - **Linting:** ESLint
 
 ---
@@ -59,7 +62,7 @@ Follow these instructions to get a local copy of the project up and running.
 
 3.  **Set up environment variables:**
 
-    You will need an API key from OpenWeatherMap. Once you have your key, create a `.env` file in the root of the project and add your key:
+    Create a `.env` file in the root of the project. You will need an API key from [OpenWeatherMap](https://openweathermap.org/api). Add your API key to the `.env` file:
 
     ```env
     VITE_OPENWEATHER_API_KEY=your_api_key_here
@@ -83,45 +86,67 @@ Follow these instructions to get a local copy of the project up and running.
 
 ---
 
+## 🌐 Supported Languages
+
+- English
+- Spanish
+
+---
+
 ## 🧪 Testing
 
-To run the test suite and ensure all components and functionalities are working as expected, use the following command:
+This project uses Jest and React Testing Library for unit and integration tests. To run the test suite, use the following command:
 
 ```sh
 npm test
+```
+
+To generate a coverage report, run:
+
+```sh
+npm run test:coverage
+```
+
+---
+
+## 린 Linting
+
+ESLint is used for code quality and consistency. To run the linter, use:
+
+```sh
+npm run lint
 ```
 
 ---
 
 ## 📁 Project Structure
 
-The project follows a standard React application structure, organized for clarity and scalability.
+The project follows a feature-based organization inside the `src` directory.
 
 ```
-.
-├── __mocks__/
-│   ├── react-icons/
-│   └── src/
-│       └── services/
-├── public/
-└── src/
-    ├── assets/
-    ├── components/
-    ├── constants/
-    ├── containers/
-    ├── hooks/
-    ├── i18n/
-    │   ├── en/
-    │   └── es/
-    ├── pages/
-    ├── routes/
-    ├── services/
-    ├── store/
-    │   ├── middleware/
-    │   └── slices/
-    ├── styles/
-    └── test-utils/
-        └── mocks/
+/
+├── __mocks__/              # Mocks for tests
+├── public/                 # Static assets
+├── src/
+│   ├── assets/             # Images and other static assets
+│   ├── components/         # Reusable UI components
+│   ├── constants/          # Application constants
+│   ├── containers/         # Components that hold one or more components
+│   ├── hooks/              # Custom React hooks
+│   ├── i18n/               # Internationalization files
+│   │   ├── en/
+│   │   └── es/
+│   ├── pages/              # Application pages
+│   ├── routes/             # Routing configuration
+│   ├── services/           # API calls and other services
+│   ├── store/              # Redux store configuration
+│   │   ├── middleware/
+│   │   └── slices/
+│   ├── styles/             # CSS modules
+│   └── test-utils/         # Test utilities and mocks
+└── tests/                  # Test files
+    ├── integration/
+    └── unit/
 ```
 
 ---
