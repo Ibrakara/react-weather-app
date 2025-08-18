@@ -29,6 +29,12 @@
 .temp {
   font-weight: 500;
 }
+.humidity,
+.windSpeed {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
 
 .description {
   font-size: 0.9rem;

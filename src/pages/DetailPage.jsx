@@ -69,6 +69,8 @@ const DetailPage = () => {
               iconCode={item.weather[0].icon}
               temp={Math.round(item.main.temp)}
               description={translate(item.weather[0].description)}
+              humidity={item.main.humidity}
+              windSpeed={Math.round(item.wind.speed)}
             />
           );
         })}
