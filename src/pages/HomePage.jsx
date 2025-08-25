@@ -53,7 +53,6 @@ function HomePage() {
   }, [searchedError, searchedLocation]);
 
   useEffect(() => {
-    
     if (
       !searchedIsSuccess ||
       !searchedLocation ||
@@ -117,23 +116,25 @@ function HomePage() {
         onSearch={(location) => dispatch(setSearchedLocation(location))}
         placeholder={translate("search placeholder")}
       />
-      {currentLocation && (
-        <WeatherCard
-          key="currentLocation"
-          forecastData={currentLocation?.forecastData}
-          weatherData={currentLocation?.cityData}
-          isRemovable={false}
-        />
-      )}
-      {searchedLocations?.map((location) => (
-        <WeatherCard
-          key={location.locationName}
-          forecastData={location.forecastData}
-          weatherData={location.cityData}
-          isRemovable={true}
-          searchedName={location.locationName}
-        />
-      ))}
+      <div className={styles.weatherCards}>
+        {currentLocation && (
+          <WeatherCard
+            key="currentLocation"
+            forecastData={currentLocation?.forecastData}
+            weatherData={currentLocation?.cityData}
+            isRemovable={false}
+          />
+        )}
+        {searchedLocations?.map((location) => (
+          <WeatherCard
+            key={location.locationName}
+            forecastData={location.forecastData}
+            weatherData={location.cityData}
+            isRemovable={true}
+            searchedName={location.locationName}
+          />
+        ))}
+      </div>
     </div>
   );
 }
